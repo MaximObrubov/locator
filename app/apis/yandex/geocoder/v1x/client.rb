@@ -1,4 +1,4 @@
-module YandexGeocoderApi
+module Yandex::Geocoder
   module V1X
     class Client
       API_ENDPOINT = 'https://geocode-maps.yandex.ru/1.x'.freeze
