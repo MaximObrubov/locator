@@ -1,3 +1,4 @@
 # LOCATOR
 
-Click on the map to get the address from the base
+Click on the map to get the address
+Try to build usefull Modules for rails
