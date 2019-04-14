@@ -1,6 +1,10 @@
+##
+# This module gives an ability to request Yandex geocoder API
+
 module Yandex::Geocoder::V1x
 
   class Client
+
     API_ENDPOINT = 'https://geocode-maps.yandex.ru'.freeze
 
     def initialize()
@@ -11,10 +15,30 @@ module Yandex::Geocoder::V1x
     end
 
 
+    ##
+    # Gets point info by coordinates
+    #
     def point_info lat:, long:
       request({
         http_method: :get,
         params: {geocode: "#{lat},#{long}"}
+      })
+    end
+
+
+    ##
+    # Gets closes to coordinate object
+    #
+    # +kind+ - type of objects
+    # +amount+ - limitation of the collection
+    def objects lat:, long:, kind:, amount: 1
+      request({
+        http_method: :get,
+        params: {
+          geocode: "#{lat},#{long}",
+          results: amount,
+          kind: kind
+        }
       })
     end
 
