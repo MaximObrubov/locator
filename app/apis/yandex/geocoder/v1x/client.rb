@@ -35,7 +35,7 @@ module Yandex::Geocoder::V1x
       request({
         http_method: :get,
         params: {
-          geocode: "#{lat},#{long}",
+          geocode: "#{long},#{lat}",
           results: amount,
           kind: kind
         }
