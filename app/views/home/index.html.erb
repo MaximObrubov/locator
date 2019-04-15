@@ -2,18 +2,19 @@
 <p>Find me in app/views/home/index.html.erb</p> -->
 
 
-<div id="map" style="width: 600px; height: 400px">
-
+<div id="map" style="width: 960px; height: 610px">
 </div>
 
-
-<%= Yandex::Geocoder::V1x::Client %>
-
-
-<script type="text/javascript">
+<script type="text/ecmascript">
   ;(function (w, $) {
     if (w.locator.Map) {
-      // new w.locator.Map().subscribe();
+      let map = new w.locator.Map({
+        lat: <%= Moscow::COORDS[:lat] %>,
+        long: <%= Moscow::COORDS[:long] %>
+      })
+
+      ymaps.ready(map.addMap.bind(map));
+      map.subscribe();
     } else {
       throw "Locator Map class not found!"
     }
