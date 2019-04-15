@@ -13,8 +13,6 @@ module Moscow extend self
     }
   end
 
-  private
-
   def min_lat
     COORDS[:lat] - COORDS[:range_lat]
   end
