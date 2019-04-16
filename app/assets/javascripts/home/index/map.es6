@@ -10,14 +10,17 @@
         throw "Maps not available!"
       }
 
-      this.$map = $(`#${self.MAP_DOM_ID}`);
       this.$root = $('body');
+      this.$map = $(`#${self.MAP_DOM_ID}`);
+      this.$results = this.$root.find(".js-results");
       this.moscow = moscow;
       this.nearObjectsUrl = nearObjectsUrl;
       this.initMapOptions = {
         center: [self.moscow.lat, self.moscow.long],
+        controls: [],
         zoom: 12 // от 0 (весь мир) до 19.
       }
+      this.housesCollection = null;
 
     }
 
@@ -72,8 +75,6 @@
     _send(data) {
       let self = this;
 
-      console.log(self.nearObjectsUrl);
-
       $.ajax({
         url: self.nearObjectsUrl,
         method: "POST",
@@ -83,10 +84,26 @@
           self.$preloader.addClass("shown");
         },
         success: (response) => {
-          console.log(response);
+          if (response.html) {
+            self.$results.html(response.html)
+          }
+          if (response.houses) {
+
+            if (self.housesCollection) {self.housesCollection.removeAll()}
+
+            self.housesCollection = new ymaps.GeoObjectCollection(null, {
+              preset: 'islands#yellowIcon'
+            }),
+            response.houses.forEach((h) => {
+              let house = h.instance,
+                  pointMark = self._getPoint(house.lat, house.long, house.address);
+                self.housesCollection.add(pointMark);
+            })
+            self.map.geoObjects.add(self.housesCollection);
+          }
         },
         error: (err) => {
-          console.err(err);
+          console.error(err);
         },
         complete: () => {
           self.$preloader.removeClass("shown");
