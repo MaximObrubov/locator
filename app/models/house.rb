@@ -21,6 +21,6 @@ class House < ApplicationRecord
         Math.sin((pr2[:long] - pr1[:long]) / 2) ** 2
     c = 2 * Math::atan2(Math::sqrt(n), Math::sqrt(1 - n))
 
-    Earth::RADIUS * c
+    (Earth::RADIUS * c).to_i
   end
 end
