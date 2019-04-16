@@ -38,16 +38,6 @@
         if (!self.map.balloon.isOpen()) {
           let coords = e.get('coords')
           self._send({lat: coords[0], long: coords[1]});
-
-          // self.map.balloon.open(coords, {
-          //     contentHeader:'Событие!',
-          //     contentBody:'<p>Кто-то щелкнул по карте.</p>' +
-          //         '<p>Координаты щелчка: ' + [
-          //         coords[0].toPrecision(6),
-          //         coords[1].toPrecision(6)
-          //         ].join(', ') + '</p>',
-          //     contentFooter:'<sup>Щелкните еще раз</sup>'
-          // });
         } else {
           self.map.balloon.close();
         }
@@ -64,10 +54,7 @@
 
     _getPoint(lat, long, address=null) {
       let opts = {};
-
-      if (address) {
-        opts.iconCaption = address
-      }
+      if (address) { opts.hintContent = address; }
       return new ymaps.Placemark([lat, long], opts);
     }
 
