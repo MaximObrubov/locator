@@ -6,13 +6,7 @@ class HomeController < ApplicationController
   def index
   end
 
-
-  def near_objects radius: 4
-
-    puts params[:lat]
-    puts params[:long]
-    puts "*" * 45
-
+  def near_houses
     render json: params.to_json
   end
 end
