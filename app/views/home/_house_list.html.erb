@@ -1,0 +1,30 @@
+
+<% if @alerts.present? %>
+  <div class="alerts">
+    <% @alerts.each do |a| %>
+      <div class="alert warning"><%= a %></div>
+    <% end %>
+  </div>
+<% end %>
+
+
+<% if houses.present? %>
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Distance from click</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% houses.each do |h| %>
+        <tr>
+          <td><%= h[:instance][:address] %></td>
+          <td><%= h[:distance] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info">No houses in the area</div>
+<% end %>
