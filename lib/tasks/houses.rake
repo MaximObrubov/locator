@@ -2,7 +2,6 @@ namespace :houses do
   desc "Adds new random 50 houses to db"
   task add: :environment do
     geo = Yandex::Geocoder::V1x::Client.new()
-    # TODO: change to 50
     limit = 50
     # if 10x tryings not led to required addresses amount,
     # it probably bad coordinates or dead api
@@ -25,11 +24,7 @@ namespace :houses do
           house = data["response"]["GeoObjectCollection"]["featureMember"][0]["GeoObject"]
           address = house["metaDataProperty"]["GeocoderMetaData"]["Address"]["formatted"]
           coords = house["Point"]["pos"].split
-
-          # TODO: replace with
-          # House.create(address: address, lat: coords[1], long: coords[0])
-          puts address
-          puts coords
+          House.create(address: address, lat: coords[1], long: coords[0])
         end
 
         limit -= 1
