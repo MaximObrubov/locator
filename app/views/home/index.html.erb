@@ -11,7 +11,7 @@
       let map = new w.locator.Map({
         lat: <%= Moscow::COORDS[:lat] %>,
         long: <%= Moscow::COORDS[:long] %>
-      })
+      }, "<%= home_near_objects_path %>")
 
       ymaps.ready(map.addMap.bind(map));
     } else {
